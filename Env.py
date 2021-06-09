@@ -14,11 +14,11 @@ class Env():
 
         last_move = 0
         if last_x < head_x:
-          last_move = 3
+            last_move = 3
         if last_x > head_x:
-          last_move = 1
+            last_move = 1
         if last_y > head_y:
-          last_move = 2
+            last_move = 2
         #["up", "left", "down", "right"]
 
 
@@ -40,9 +40,9 @@ class Env():
         #list food
         food = np.zeros((len(data['board']['food']), 2))
         for i in range(len(data['board']['food']):
-          food_x = data['board']['food'][i]['x']
-          food_y = data['board']['food'][i]['y']
-          food[i] = [food_x, food_y]
+            food_x = data['board']['food'][i]['x']
+            food_y = data['board']['food'][i]['y']
+            food[i] = [food_x, food_y]
 
         """
         --0--
@@ -51,63 +51,74 @@ class Env():
         """
 
         if last_move == 0:
-          sensor_locs = np.array([
-            [head_x, head_y + 2],
-            [head_x - 1, head_y + 1],
-            [head_x, head_y + 1],
-            [head_x + 1, head_y + 1],
-            [head_x - 2, head_y],
-            [head_x - 1, head_y],
-            [head_x + 1, head_y],
-            [head_x + 2, head_y]
-          ])
+            sensor_locs = np.array([
+                [head_x, head_y + 2],
+                [head_x - 1, head_y + 1],
+                [head_x, head_y + 1],
+                [head_x + 1, head_y + 1],
+                [head_x - 2, head_y],
+                [head_x - 1, head_y],
+                [head_x + 1, head_y],
+                [head_x + 2, head_y]
+            ])
         elif last_move == 1:
-          sensor_locs = np.array([
-            [head_x - 2, head_y],
-            [head_x - 1, head_y - 1],
-            [head_x - 1, head_y],
-            [head_x - 1, head_y + 1],
-            [head_x, head_y - 2],
-            [head_x, head_y - 1],
-            [head_x, head_y + 1],
-            [head_x, head_y + 2]
-          ])
+            sensor_locs = np.array([
+                [head_x - 2, head_y],
+                [head_x - 1, head_y - 1],
+                [head_x - 1, head_y],
+                [head_x - 1, head_y + 1],
+                [head_x, head_y - 2],
+                [head_x, head_y - 1],
+                [head_x, head_y + 1],
+                [head_x, head_y + 2]
+            ])
         elif last_move == 2:
-          sensor_locs = np.array([
-            [head_x, head_y - 2],
-            [head_x + 1, head_y - 1],
-            [head_x, head_y - 1],
-            [head_x - 1, head_y - 1],
-            [head_x + 2, head_y],
-            [head_x + 1, head_y],
-            [head_x - 1, head_y],
-            [head_x - 2, head_y]
-          ])
+            sensor_locs = np.array([
+                [head_x, head_y - 2],
+                [head_x + 1, head_y - 1],
+                [head_x, head_y - 1],
+                [head_x - 1, head_y - 1],
+                [head_x + 2, head_y],
+                [head_x + 1, head_y],
+                [head_x - 1, head_y],
+                [head_x - 2, head_y]
+            ])
         else: # last_move == 3:
-          sensor_locs = np.array([
-            [head_x + 2, head_y],
-            [head_x + 1, head_y + 1],
-            [head_x + 1, head_y],
-            [head_x + 1, head_y - 1],
-            [head_x, head_y + 2],
-            [head_x, head_y + 1],
-            [head_x, head_y - 1],
-            [head_x, head_y - 2]
-          ])
+            sensor_locs = np.array([
+                [head_x + 2, head_y],
+                [head_x + 1, head_y + 1],
+                [head_x + 1, head_y],
+                [head_x + 1, head_y - 1],
+                [head_x, head_y + 2],
+                [head_x, head_y + 1],
+                [head_x, head_y - 1],
+                [head_x, head_y - 2]
+            ])
 
 
         sensor = np.zeros(8)
 
         for i in range():
-          if (food == sensor_locs[i]).all(1).any():
-            sensor[i] = 1
-          if (obstacles == sensor_locs[i]).all(1).any():
-            sensor[i] = -1
-          if not (
-            sensor_locs[i][0] >= 0 and
-            sensor_locs[i][0] < width and
-            sensor_locs[i][1] >= 0 and
-            sensor_locs[i][1] < height
-          ):
-            sensor[i] = -1
-        return state, last_move
+            if (food == sensor_locs[i]).all(1).any():
+                sensor[i] = 1
+            if (obstacles == sensor_locs[i]).all(1).any():
+                sensor[i] = -1
+            if not (
+                sensor_locs[i][0] >= 0 and
+                sensor_locs[i][0] < width and
+                sensor_locs[i][1] >= 0 and
+                sensor_locs[i][1] < height
+            ):
+                sensor[i] = -1
+
+        place = 1
+        state = 1
+        for i in range(8):
+            state += (sensor[i] + 1) * place
+            place *= 3
+
+        return state, last_move, sensor
+
+    #["up", "left", "down", "right"]
+    def action_to_move(action, heading):
+        return (action + heading)%4
