@@ -1,0 +1,37 @@
+{
+  'game': {
+    'id': '5349da68-7882-4c10-b2e8-cdf105af8fd0', 
+    'ruleset': {
+      'name': 'standard', 'version': 'v1.0.17'
+    }, 
+    'timeout': 500
+  }, 
+  'turn': 9, 
+  'board': {
+    'height': 11, 
+    'width': 11, 
+    'snakes': [
+      {
+        'id': 'gs_Vdj6GwkdhHbwkCPFmTJpvDWd', 
+        'name': "Vaud's first baby snake", 
+        'latency': '187', 
+        'health': 97, 
+        'body': [{'x': 1, 'y': 10}, {'x': 2, 'y': 10}, {'x': 3, 'y': 10}, {'x': 3, 'y': 9}], 
+        'head': {'x': 1, 'y': 10}, 
+        'length': 4, 'shout': ''
+      }
+    ], 
+    'food': [{'x': 6, 'y': 8}, {'x': 2, 'y': 2}, {'x': 5, 'y': 5}], 
+    'hazards': []
+    }, 
+    'you': {
+      'id': 'gs_Vdj6GwkdhHbwkCPFmTJpvDWd', 
+      'name': "Vaud's first baby snake", 
+      'latency': '187', 
+      'health': 97, 
+      'body': [{'x': 1, 'y': 10}, {'x': 2, 'y': 10}, {'x': 3, 'y': 10}, {'x': 3, 'y': 9}], 
+      'head': {'x': 1, 'y': 10}, 
+      'length': 4, 
+      'shout': ''
+  }
+} 
